@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChatView: View {
     
-    @State var showUserProfileView: Bool = false
     @State var chatIsClear: Bool = false
     @StateObject var viewModel = ChatViewModel()
     
@@ -22,9 +21,7 @@ struct ChatView: View {
             VStack {
                 
                 headerView
-                    .sheet(isPresented: $showUserProfileView, content: {
-                        UserProfileView()
-                    })
+                
                 // რადგან ეს მესიჯები storage ში არ გვაქვს შენახული რომ თავიდან წამოვიღო,
                 // Clear Chat ღილაკზე დაჭერისას მესიჯებს უბრალოდ დავმალავ
                 // და შემდეგ გამოვაჩენ მეორე ღილაკზე დაჭრისას.
@@ -57,23 +54,10 @@ struct ChatView: View {
 extension ChatView {
     
     var headerView: some View {
-        HStack {
-            Spacer()
-            Text("Chat")
-                .foregroundStyle(.white)
-                .font(.title)
-            .fontWeight(.semibold)
-            Spacer()
-            Button(action: {
-                showUserProfileView.toggle()
-            }, label: {
-                Image(systemName: "plus")
-                    .font(.title3)
-            })
-        }
-        .padding(.horizontal)
-
-        
+        Text("Chat")
+            .foregroundStyle(.white)
+            .font(.title)
+        .fontWeight(.semibold)
     }
     
     var listView: some View {
