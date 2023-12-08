@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TaskView: View {
     
+    //MARK: - Struct Properties
     let task: Task
     @State var isFinished: Bool
     @Binding var completedTasks: [Task]
     @Binding var notCompletedTasks: [Task]
         
     
+    // MARK: - Main Body
     var body: some View {
         
         HStack(alignment: .center) {
@@ -49,7 +51,7 @@ struct TaskView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
-    func taskFinishedClicked() {
+    private func taskFinishedClicked() {
         if isFinished {
             completedTasks.append(Task(toDo: task.toDo, color: task.color, date: task.date, isFinished: true))
             notCompletedTasks.removeAll(where: {$0.id == task.id})
@@ -60,6 +62,7 @@ struct TaskView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     TaskView(task: Task(toDo: "Mobile App Research", color: Color.mainColor, date: "4 Oct", isFinished: false), isFinished: true, completedTasks: .constant([]), notCompletedTasks: .constant([]))
 }

@@ -9,25 +9,24 @@ import SwiftUI
 
 struct ToDoListView: View {
     
-    @State var completedTasks: [Task] = [
+    // MARK: - Struct Properties
+    @State private var completedTasks: [Task] = [
         Task(toDo: "Task1", color: Color.mainColor, date: "4 Oct", isFinished: true),
         Task(toDo: "Task2", color: Color.mainColor, date: "4 Oct", isFinished: true),
         Task(toDo: "Task3", color: Color.mainColor, date: "4 Oct", isFinished: true),
         Task(toDo: "Task4", color: Color.mainColor, date: "4 Oct", isFinished: false),
         Task(toDo: "Task5", color: Color.mainColor, date: "4 Oct", isFinished: false)
-
     ]
     
-    @State var notCompletedTasks: [Task] = [
+    @State private var notCompletedTasks: [Task] = [
         Task(toDo: "Task6", color: Color.mainColor, date: "4 Oct", isFinished: false),
         Task(toDo: "Task7", color: Color.mainColor, date: "4 Oct", isFinished: false),
         Task(toDo: "Task8", color: Color.mainColor, date: "4 Oct", isFinished: false),
         Task(toDo: "Task9", color: Color.mainColor, date: "4 Oct", isFinished: false),
         Task(toDo: "Task10", color: Color.mainColor, date: "4 Oct", isFinished: false)
-
     ]
     
-    
+    // MARK: - Main Body
     var body: some View {
         ZStack {
             Color.black
@@ -36,7 +35,6 @@ struct ToDoListView: View {
             VStack(alignment: .leading) {
                 
                 profileHStack
-                
                 completeAllButton
                 
                 Text("Progress")
@@ -45,31 +43,25 @@ struct ToDoListView: View {
                     .fontWeight(.semibold)
                 
                 progressVStack
-                
                 listView
-                
                 Spacer()
             }
             .padding()
         }
     }
     
-    func calculatePercentage() -> Int {
+    private func calculatePercentage() -> Int {
         let completedTasksCount = completedTasks.count
         let notCompletedTasksCount = notCompletedTasks.count
         let allTasksCount = completedTasksCount + notCompletedTasksCount
         return (completedTasksCount * 100) / allTasksCount
-        
     }
 }
 
-#Preview {
-    ToDoListView()
-}
-
-
+// MARK: - ToDoListView Extension
 extension ToDoListView {
     
+    // MARK: - ProfileHStack
     var profileHStack: some View {
         HStack {
             
@@ -110,6 +102,7 @@ extension ToDoListView {
         }
     }
     
+    // MARK: - completeAllButton
     var completeAllButton: some View {
         Button(action: {
             withAnimation(.spring) {
@@ -131,6 +124,7 @@ extension ToDoListView {
         })
     }
     
+    // MARK: - progressVStack
     var progressVStack: some View {
         VStack(alignment: .leading) {
             Text("Daily Task")
@@ -155,6 +149,7 @@ extension ToDoListView {
 
     }
     
+    // MARK: - ProgressBar
     var progressBar: some View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
@@ -170,6 +165,7 @@ extension ToDoListView {
         .frame(height: 20)
     }
     
+    // MARK: - listView
     var listView: some View {
         List {
             Section {
@@ -202,4 +198,9 @@ extension ToDoListView {
         .background(Color.black)
         .listStyle(.plain)
     }
+}
+
+// MARK: - Preview
+#Preview {
+    ToDoListView()
 }

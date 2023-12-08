@@ -14,7 +14,7 @@ struct Task: Hashable {
     let toDo: String
     let color: Color
     let date: String
-    var isFinished: Bool
+    let isFinished: Bool
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
