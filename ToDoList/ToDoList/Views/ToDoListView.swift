@@ -12,18 +12,18 @@ struct ToDoListView: View {
     // MARK: - Struct Properties
     @State private var completedTasks: [Task] = [
         Task(toDo: "Task1", color: Color.mainColor, date: "4 Oct", isFinished: true),
-        Task(toDo: "Task2", color: Color.mainColor, date: "4 Oct", isFinished: true),
-        Task(toDo: "Task3", color: Color.mainColor, date: "4 Oct", isFinished: true),
-        Task(toDo: "Task4", color: Color.mainColor, date: "4 Oct", isFinished: false),
+        Task(toDo: "Task2", color: Color.blue, date: "4 Oct", isFinished: true),
+        Task(toDo: "Task3", color: Color.red, date: "4 Oct", isFinished: true),
+        Task(toDo: "Task4", color: Color.pink, date: "4 Oct", isFinished: false),
         Task(toDo: "Task5", color: Color.mainColor, date: "4 Oct", isFinished: false)
     ]
     
     @State private var notCompletedTasks: [Task] = [
-        Task(toDo: "Task6", color: Color.mainColor, date: "4 Oct", isFinished: false),
-        Task(toDo: "Task7", color: Color.mainColor, date: "4 Oct", isFinished: false),
-        Task(toDo: "Task8", color: Color.mainColor, date: "4 Oct", isFinished: false),
+        Task(toDo: "Task6", color: Color.yellow, date: "4 Oct", isFinished: false),
+        Task(toDo: "Task7", color: Color.purple, date: "4 Oct", isFinished: false),
+        Task(toDo: "Task8", color: Color.white, date: "4 Oct", isFinished: false),
         Task(toDo: "Task9", color: Color.mainColor, date: "4 Oct", isFinished: false),
-        Task(toDo: "Task10", color: Color.mainColor, date: "4 Oct", isFinished: false)
+        Task(toDo: "Task10", color: Color.orange, date: "4 Oct", isFinished: false)
     ]
     
     // MARK: - Main Body
