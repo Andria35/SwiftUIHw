@@ -16,9 +16,7 @@ struct GroceryShopView: View {
     var body: some View {
         VStack {
             listView
-            
             myBasketView
-            
             getSaleButton
         }
         .padding(.vertical)
