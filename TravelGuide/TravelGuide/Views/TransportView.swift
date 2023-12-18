@@ -15,7 +15,6 @@ struct TransportView: View {
     // MARK: - Main Body
     var body: some View {
         VStack {
-                        
             ScrollView {
                 VStack {
                     ForEach(transportDetails) { transport in
