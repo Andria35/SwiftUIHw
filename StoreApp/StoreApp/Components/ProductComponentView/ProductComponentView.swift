@@ -10,7 +10,6 @@ import SwiftUI
 struct ProductComponentView: View {
     
     // MARK: - Properties
-    let product: Product
     @StateObject var viewModel: ProductComponentViewModel
     
     // MARK: - Body
@@ -35,19 +34,16 @@ extension ProductComponentView {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: 120)
-            .task {
-                await viewModel.fetchImage(urlString: product.images.first ?? "")
-            }
     }
     
     // MARK: - namePriceVStack
     private var namePriceVStack: some View {
         VStack(alignment:.leading) {
-            Text(product.title)
+            Text(viewModel.product.title)
                 .lineLimit(1)
                 .font(.title3)
             .fontWeight(.semibold)
-            Text("$: \(product.price)")
+            Text("$: \(viewModel.product.price)")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -57,7 +53,7 @@ extension ProductComponentView {
         HStack {
             Button(action: {
                 withAnimation(.interactiveSpring) {
-                    viewModel.deleteProductFromBasket(product)
+                    viewModel.deleteProduct()
                 }
             }, label: {
                 Image(systemName: "trash")
@@ -68,7 +64,7 @@ extension ProductComponentView {
             countHStack
             Spacer()
             
-            Image(systemName: viewModel.productInBasket(product) ? "cart.fill" : "cart")
+            Image(systemName: viewModel.inBasket() ? "cart.fill" : "cart")
         }
         .padding(.top)
     }
@@ -77,12 +73,12 @@ extension ProductComponentView {
     private var countHStack: some View {
         HStack {
             Button(action: {
-                viewModel.reduceItemCount(product)
+                viewModel.reduceItem()
             }, label: {
                 Image(systemName: "minus")
             })
             .buttonStyle(.borderless)
-            Text("\(viewModel.getQuantityInBasket(product))")
+            Text("\(viewModel.getQuantity())")
                 .font(.title3)
                 .padding(.horizontal, 5)
                 .overlay {
@@ -91,7 +87,7 @@ extension ProductComponentView {
                 }
             
             Button(action: {
-                viewModel.addProductToBasket(product)
+                viewModel.addProduct()
 
             }, label: {
                 Image(systemName: "plus")
@@ -104,6 +100,6 @@ extension ProductComponentView {
 
 // MARK: - Preview
 #Preview(traits: .sizeThatFitsLayout) {
-    ProductComponentView(product: ProductMockData.product, viewModel: ProductComponentViewModel(addProductToBasket: { _ in }, getQuantityInBasket: { _ in 0 }, reduceItemCount: { _ in }, productInBasket: { _ in false }, deleteProductFromBasket: { _ in }) )
+    ProductComponentView(viewModel: ProductComponentViewModel(product: ProductMockData.product, addProductToBasket: { _ in }, getQuantityInBasket: { _ in 0 }, reduceItemCount: { _ in }, productInBasket: { _ in false }, deleteProductFromBasket: { _ in }) )
         .frame(width: 200)
 }

@@ -10,8 +10,8 @@ import SwiftUI
 struct CategoriesView: View {
     
     // MARK: - Properties
-    @StateObject var viewModel = CategoriesViewModel()
-    @EnvironmentObject var router: Router
+    @StateObject private var viewModel = CategoriesViewModel()
+    @EnvironmentObject private var router: Router
 
     // MARK: - Body
     var body: some View {

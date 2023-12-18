@@ -66,6 +66,19 @@ final class MainViewModel: ObservableObject {
     func deleteProductFromBasket(_ product: Product) {
         basket.removeAll(where: {$0.id == product.id})
     }
+        
+    func checkout() {
+        if balanceIsEnough() {
+            makePurchase()
+            showSuccessAlert.toggle()
+        } else {
+            showFailureAlert.toggle()
+        }
+    }
+    
+    func basketItemCountIsEmpty() -> Bool {
+        basketItemCount == 0 ? true : false
+    }
     
     private func balanceIsEnough() -> Bool {
         userBalance < basketTotalPrice ? false : true
@@ -76,22 +89,8 @@ final class MainViewModel: ObservableObject {
         basket.removeAll()
     }
     
-    func checkout() {
-        if balanceIsEnough() {
-            makePurchase()
-            showSuccessAlert.toggle()
-        } else {
-            showFailureAlert.toggle()
-        }
-    }
-    
-    
-    func basketItemCountIsEmpty() -> Bool {
-        basketItemCount == 0 ? true : false
-    }
-    
     // MARK: - Network Calls
-    func fetchProducts() async {
+    private func fetchProducts() async {
         let urlString = "https://dummyjson.com/products"
         do {
             let productsResponse: ProductsResponse = try await NetworkManager.shared.fetchData(fromURL: urlString)

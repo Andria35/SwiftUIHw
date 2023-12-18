@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductsDetailsView: View {
     
     @StateObject var viewModel: ProductDetailsViewModel
-    @EnvironmentObject var router: Router
+    @EnvironmentObject private var router: Router
     
     var body: some View {
         ZStack {

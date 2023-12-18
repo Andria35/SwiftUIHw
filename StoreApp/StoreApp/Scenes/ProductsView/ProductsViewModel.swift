@@ -10,8 +10,8 @@ import Foundation
 final class ProductsViewModel: ObservableObject {
     
     // MARK: - Properties
-    let products: [Product]
-    let category: String
+    private let products: [Product]
+    private let category: String
     
     @Published var categoryProduct: [Product] = []
     @Published var basket: [Product] = []
@@ -27,7 +27,6 @@ final class ProductsViewModel: ObservableObject {
         basket.reduce(0.0) { $0 + ((Double($1.price)) * Double($1.quantityInBasket)) }
     }
 
-    
     // MARK: - Initialization
     init(products: [Product], category: String) {
         self.products = products
@@ -73,16 +72,7 @@ final class ProductsViewModel: ObservableObject {
     func deleteProductFromBasket(_ product: Product) {
         basket.removeAll(where: {$0.id == product.id})
     }
-    
-    private func balanceIsEnough() -> Bool {
-        userBalance < basketTotalPrice ? false : true
-    }
-    
-    private func makePurchase() {
-        userBalance -= basketTotalPrice
-        basket.removeAll()
-    }
-    
+        
     func checkout() {
         if balanceIsEnough() {
             makePurchase()
@@ -92,9 +82,17 @@ final class ProductsViewModel: ObservableObject {
         }
     }
     
-    
     func basketItemCountIsEmpty() -> Bool {
         basketItemCount == 0 ? true : false
+    }
+    
+    private func balanceIsEnough() -> Bool {
+        userBalance < basketTotalPrice ? false : true
+    }
+    
+    private func makePurchase() {
+        userBalance -= basketTotalPrice
+        basket.removeAll()
     }
     
 }

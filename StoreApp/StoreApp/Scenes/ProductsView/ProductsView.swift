@@ -12,7 +12,7 @@ struct ProductsView: View {
     // MARK: - Properties
     @StateObject var viewModel: ProductsViewModel
     @State var isLoading: Bool = false
-    @EnvironmentObject var router: Router
+    @EnvironmentObject private var router: Router
 
     private let gridLayout: [GridItem] = [
         GridItem(.flexible()),
@@ -55,7 +55,7 @@ extension ProductsView {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.categoryProduct) { product in
-                    ProductComponentView(product: product, viewModel: ProductComponentViewModel(addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
+                    ProductComponentView(viewModel: ProductComponentViewModel(product: product, addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
                         .onTapGesture {
                             router.navigate(to: .productsDetailsView(product: product))
                         }

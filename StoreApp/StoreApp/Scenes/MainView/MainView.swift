@@ -10,8 +10,8 @@ import SwiftUI
 struct MainView: View {
     
     // MARK: - Properties
-    @StateObject var viewModel = MainViewModel()
-    @State var isLoading: Bool = false
+    @StateObject private var viewModel = MainViewModel()
+    @State private var isLoading: Bool = false
     
     private let gridLayout: [GridItem] = [
         GridItem(.flexible()),
@@ -48,11 +48,12 @@ extension MainView {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.products) { product in
-                    ProductComponentView(product: product, viewModel: ProductComponentViewModel(addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
+                    ProductComponentView( viewModel: ProductComponentViewModel(product: product,addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
                 }
             }
         }
     }
+    
 }
 
 // MARK: - Preview

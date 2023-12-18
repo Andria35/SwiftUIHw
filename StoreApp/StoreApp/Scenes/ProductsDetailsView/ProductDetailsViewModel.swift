@@ -24,7 +24,7 @@ final class ProductDetailsViewModel: ObservableObject {
     }
     
     // MARK: - Api Calls
-    func fetchImage(urlString: String) async{
+    private func fetchImage(urlString: String) async{
         do {
             let image = try await NetworkManager.shared.fetchImage(fromURL: urlString)
             await MainActor.run {

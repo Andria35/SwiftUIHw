@@ -22,6 +22,6 @@ struct headerTextComponentView: View {
 }
 
 // MARK: - Preview
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     headerTextComponentView(text: "Categories")
 }

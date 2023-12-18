@@ -24,7 +24,7 @@ final class CategoriesViewModel: ObservableObject {
     }
     
     // MARK: - Network Calls
-    func fetchProducts() async {
+    private func fetchProducts() async {
         let urlString = "https://dummyjson.com/products"
         do {
             let productsResponse: ProductsResponse = try await NetworkManager.shared.fetchData(fromURL: urlString)

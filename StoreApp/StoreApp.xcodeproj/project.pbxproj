@@ -134,10 +134,10 @@
 		1033DA872B2F17A900E02387 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				1033DAB82B30953E00E02387 /* MainBackgroundComponentView.swift */,
 				1033DAAB2B3075EA00E02387 /* ProductComponentView */,
-				1033DA9F2B2F87F700E02387 /* CategoryComponentView.swift */,
 				1033DAB12B30883400E02387 /* CartComponentView */,
+				1033DAB82B30953E00E02387 /* MainBackgroundComponentView.swift */,
+				1033DA9F2B2F87F700E02387 /* CategoryComponentView.swift */,
 				1033DAB62B30944A00E02387 /* LoadingComponentView.swift */,
 				1033DABA2B309A6700E02387 /* headerTextComponentView.swift */,
 			);
