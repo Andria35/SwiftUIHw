@@ -21,7 +21,7 @@ struct CategoriesView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal, content: {
-                headerTextComponentView(text: "Categories")
+                HeaderTextComponentView(text: "Categories")
             })
         }
     }
@@ -34,11 +34,17 @@ extension CategoriesView {
     private var categoriesScrollView: some View {
         ScrollView {
             ForEach(viewModel.uniqueCategories, id: \.self) { category in
-                Button(action: {
-                    router.navigate(to: .productsView(category: category, products: viewModel.products))
-                }, label: {
-                    CategoryComponentView(category: category)
-                })
+                Button(
+                    action: {
+                        router.navigate(to: .productsView(
+                            category: category,
+                            products: viewModel.products
+                        ))
+                    },
+                    label: {
+                        CategoryComponentView(category: category)
+                    }
+                )
             }
         }
     }

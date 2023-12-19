@@ -14,7 +14,7 @@ struct ProductsResponse: Decodable {
 }
 
 // MARK: - Product
-struct Product: Codable, Identifiable, Hashable {
+struct Product: Decodable, Identifiable, Hashable {
     var quantityInBasket: Int = 1
     let id: Int
     let title, description: String
@@ -29,6 +29,7 @@ struct Product: Codable, Identifiable, Hashable {
         case id, title, description, price, discountPercentage, rating, stock,
         brand, category, thumbnail, images
     }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

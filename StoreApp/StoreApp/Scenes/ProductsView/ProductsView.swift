@@ -35,7 +35,7 @@ struct ProductsView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal, content: {
-                headerTextComponentView(text: "Products")
+                HeaderTextComponentView(text: "Products")
             })
         }
 
@@ -47,7 +47,18 @@ extension ProductsView {
     
     // MARK: - cartComponentView
     private var cartComponentView: some View {
-        CartComponentView(viewModel: CartComponentViewModel(checkout: viewModel.checkout, basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty), userBalance: viewModel.userBalance, basketItemCount: viewModel.basketItemCount, basketTotalPrice: viewModel.basketTotalPrice, isLoading: $isLoading, showSuccessAlert: $viewModel.showSuccessAlert, showFailureAlert: $viewModel.showFailureAlert)
+        CartComponentView(
+            viewModel: CartComponentViewModel(
+                checkout: viewModel.checkout,
+                basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty
+            ),
+            userBalance: viewModel.userBalance,
+            basketItemCount: viewModel.basketItemCount,
+            basketTotalPrice: viewModel.basketTotalPrice,
+            isLoading: $isLoading,
+            showSuccessAlert: $viewModel.showSuccessAlert,
+            showFailureAlert: $viewModel.showFailureAlert
+        )
     }
     
     // MARK: - productScrollView
@@ -55,10 +66,17 @@ extension ProductsView {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.categoryProduct) { product in
-                    ProductComponentView(viewModel: ProductComponentViewModel(product: product, addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
-                        .onTapGesture {
-                            router.navigate(to: .productsDetailsView(product: product))
-                        }
+                    ProductComponentView(viewModel: ProductComponentViewModel(
+                        product: product,
+                        addProductToBasket: viewModel.addProductToBasket,
+                        getQuantityInBasket: viewModel.getQuantityInBasket,
+                        reduceItemCount: viewModel.reduceItemCount,
+                        productInBasket: viewModel.productInBasket,
+                        deleteProductFromBasket: viewModel.deleteProductFromBasket
+                    ))
+                    .onTapGesture {
+                        router.navigate(to: .productsDetailsView(product: product))
+                    }
                 }
             }
         }
@@ -69,7 +87,12 @@ extension ProductsView {
 // MARK: - Properties
 #Preview {
     NavigationStack {
-        ProductsView(viewModel: ProductsViewModel(products: [], category: ""))
-            .environmentObject(Router())
+        ProductsView(
+            viewModel: ProductsViewModel(
+                products: [],
+                category: ""
+            )
+        )
+        .environmentObject(Router())
     }
 }

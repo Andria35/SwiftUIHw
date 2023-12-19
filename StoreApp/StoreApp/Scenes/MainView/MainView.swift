@@ -40,7 +40,18 @@ extension MainView {
     
     // MARK: - cartComponentView
     private var cartComponentView: some View {
-        CartComponentView(viewModel: CartComponentViewModel(checkout: viewModel.checkout, basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty), userBalance: viewModel.userBalance, basketItemCount: viewModel.basketItemCount, basketTotalPrice: viewModel.basketTotalPrice, isLoading: $isLoading, showSuccessAlert: $viewModel.showSuccessAlert, showFailureAlert: $viewModel.showFailureAlert)
+        CartComponentView(
+            viewModel: CartComponentViewModel(
+                checkout: viewModel.checkout,
+                basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty
+            ),
+            userBalance: viewModel.userBalance,
+            basketItemCount: viewModel.basketItemCount,
+            basketTotalPrice: viewModel.basketTotalPrice,
+            isLoading: $isLoading,
+            showSuccessAlert: $viewModel.showSuccessAlert,
+            showFailureAlert: $viewModel.showFailureAlert
+        )
     }
     
     // MARK: - productScrollView
@@ -48,7 +59,14 @@ extension MainView {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.products) { product in
-                    ProductComponentView( viewModel: ProductComponentViewModel(product: product,addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
+                    ProductComponentView(viewModel: ProductComponentViewModel(
+                        product: product,
+                        addProductToBasket: viewModel.addProductToBasket,
+                        getQuantityInBasket: viewModel.getQuantityInBasket,
+                        reduceItemCount: viewModel.reduceItemCount,
+                        productInBasket: viewModel.productInBasket,
+                        deleteProductFromBasket: viewModel.deleteProductFromBasket
+                    ))
                 }
             }
         }

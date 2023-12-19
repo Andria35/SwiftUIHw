@@ -72,12 +72,16 @@ extension ProductComponentView {
     // MARK: - countVStack
     private var countHStack: some View {
         HStack {
-            Button(action: {
-                viewModel.reduceItem()
-            }, label: {
-                Image(systemName: "minus")
-            })
+            Button(
+                action: {
+                    viewModel.reduceItem()
+                },
+                label: {
+                    Image(systemName: "minus")
+                }
+            )
             .buttonStyle(.borderless)
+            
             Text("\(viewModel.getQuantity())")
                 .font(.title3)
                 .padding(.horizontal, 5)
@@ -86,12 +90,14 @@ extension ProductComponentView {
                         .stroke(Color.black.opacity(0.5))
                 }
             
-            Button(action: {
-                viewModel.addProduct()
-
-            }, label: {
-                Image(systemName: "plus")
-            })
+            Button(
+                action: {
+                    viewModel.addProduct()
+                },
+                label: {
+                    Image(systemName: "plus")
+                }
+            )
             .buttonStyle(.borderless)
         }
     }
@@ -100,6 +106,15 @@ extension ProductComponentView {
 
 // MARK: - Preview
 #Preview(traits: .sizeThatFitsLayout) {
-    ProductComponentView(viewModel: ProductComponentViewModel(product: ProductMockData.product, addProductToBasket: { _ in }, getQuantityInBasket: { _ in 0 }, reduceItemCount: { _ in }, productInBasket: { _ in false }, deleteProductFromBasket: { _ in }) )
-        .frame(width: 200)
+    ProductComponentView(
+        viewModel: ProductComponentViewModel(
+            product: ProductMockData.product,
+            addProductToBasket: { _ in },
+            getQuantityInBasket: { _ in 0 },
+            reduceItemCount: { _ in },
+            productInBasket: { _ in false },
+            deleteProductFromBasket: { _ in }
+        )
+    )
+    .frame(width: 200)
 }

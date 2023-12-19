@@ -53,22 +53,25 @@ extension CartComponentView {
             
             Spacer()
             
-            Button(action: {
-                checkoutPressed()
-            }, label: {
-                Text("Checkout")
-                    .font(.headline)
-                    .foregroundStyle(.white)
-                    .padding(10)
-                    .background(Color.secondaryBackgroundColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            })
+            Button(
+                action: {
+                    checkoutPressed()
+                },
+                label: {
+                    Text("Checkout")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(Color.secondaryBackgroundColor)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            )
         }
-        .alert("❌Checkout Failed", isPresented: $showFailureAlert){
+        .alert("❌Checkout Failed", isPresented: $showFailureAlert) {
         } message: {
             Text("Not Enough Money")
         }
-        .alert("✅Checkout Succeeded", isPresented: $showSuccessAlert){
+        .alert("✅Checkout Succeeded", isPresented: $showSuccessAlert) {
         } message: {
             Text("Successfully bought!")
         }
@@ -76,9 +79,7 @@ extension CartComponentView {
     
     // MARK: - checkoutPressed
     private func checkoutPressed() {
-        if viewModel.basketItemCountIsEmpty() {
-            return
-        }
+        if viewModel.basketItemCountIsEmpty() { return }
         isLoading = true
         viewModel.checkout()
     }
@@ -87,5 +88,16 @@ extension CartComponentView {
 
 // MARK: - Preview
 #Preview(traits: .sizeThatFitsLayout) {
-    CartComponentView(viewModel: CartComponentViewModel(checkout: { }, basketItemCountIsEmpty: { false }), userBalance: 0.0, basketItemCount: 0, basketTotalPrice: 0, isLoading: .constant(false), showSuccessAlert: .constant(false), showFailureAlert: .constant(false))
+    CartComponentView(
+        viewModel: CartComponentViewModel(
+            checkout: { },
+            basketItemCountIsEmpty: { false }
+        ),
+        userBalance: 0.0,
+        basketItemCount: 0,
+        basketTotalPrice: 0,
+        isLoading: .constant(false),
+        showSuccessAlert: .constant(false),
+        showFailureAlert: .constant(false)
+    )
 }

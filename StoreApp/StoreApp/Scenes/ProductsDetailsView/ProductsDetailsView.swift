@@ -26,7 +26,7 @@ struct ProductsDetailsView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal, content: {
-                headerTextComponentView(text: "Product Details")
+                HeaderTextComponentView(text: "Product Details")
             })
         }
     }
@@ -81,23 +81,30 @@ extension ProductsDetailsView {
     
     // MARK: - returnToCategoriesButton
     private var returnToCategoriesButton: some View {
-        Button(action: {
-            router.navigateToRoot()
-        }, label: {
-            Text("Return To Categories")
-                .font(.headline)
-                .foregroundStyle(.white)
-                .padding()
-                .padding(.horizontal)
-                .background(Color.secondaryBackgroundColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-        })
+        Button(
+            action: {
+                router.navigateToRoot()
+            },
+            label: {
+                Text("Return To Categories")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .padding()
+                    .padding(.horizontal)
+                    .background(Color.secondaryBackgroundColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+        )
     }
 }
 
 #Preview {
     NavigationStack {
-        ProductsDetailsView(viewModel: ProductDetailsViewModel(product: ProductMockData.product))
+        ProductsDetailsView(
+            viewModel: ProductDetailsViewModel(
+                product: ProductMockData.product
+            )
+        )
     }
     .environmentObject(Router())
 }

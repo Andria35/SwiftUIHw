@@ -5,7 +5,6 @@
 //  Created by Andria Inasaridze on 18.12.23.
 //
 
-import Foundation
 import NetworkManager
 import SwiftUI
 
@@ -24,7 +23,14 @@ final class ProductComponentViewModel: ObservableObject {
     private var deleteProductFromBasket: (Product) -> ()
     
     // MARK: - Initialization
-    init(product: Product, addProductToBasket: @escaping (Product) -> Void, getQuantityInBasket: @escaping (Product) -> Int, reduceItemCount: @escaping (Product) -> Void, productInBasket: @escaping (Product) -> Bool, deleteProductFromBasket: @escaping (Product) -> Void) {
+    init(
+        product: Product,
+        addProductToBasket: @escaping (Product) -> Void,
+        getQuantityInBasket: @escaping (Product) -> Int,
+        reduceItemCount: @escaping (Product) -> Void,
+        productInBasket: @escaping (Product) -> Bool,
+        deleteProductFromBasket: @escaping (Product) -> Void
+    ) {
         self.product = product
         self.addProductToBasket = addProductToBasket
         self.getQuantityInBasket = getQuantityInBasket
@@ -35,7 +41,7 @@ final class ProductComponentViewModel: ObservableObject {
         Task {
             await fetchImage(urlString: product.images.first ?? "")
         }
-
+        
     }
     
     // MARK: - Methods
@@ -60,7 +66,7 @@ final class ProductComponentViewModel: ObservableObject {
     }
     
     // MARK: - Api Calls
-    private func fetchImage(urlString: String) async{
+    private func fetchImage(urlString: String) async {
         do {
             let image = try await NetworkManager.shared.fetchImage(fromURL: urlString)
             await MainActor.run {
