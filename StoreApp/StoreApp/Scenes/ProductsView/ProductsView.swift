@@ -11,7 +11,6 @@ struct ProductsView: View {
     
     // MARK: - Properties
     @StateObject var viewModel: ProductsViewModel
-    @State var isLoading: Bool = false
     @EnvironmentObject private var router: Router
 
     private let gridLayout: [GridItem] = [
@@ -23,8 +22,20 @@ struct ProductsView: View {
     var body: some View {
         ZStack {
             MainBackgroundComponentView()
-            if isLoading {
-                LoadingComponentView(isLoading: $isLoading)
+            isLoading()
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal, content: {
+                HeaderTextComponentView(text: "Products")
+            })
+        }
+    }
+    
+    // MARK: - Methods
+    private func isLoading() -> some View {
+        Group {
+            if viewModel.isLoading {
+                LoadingComponentView(isLoading: $viewModel.isLoading)
             } else {
                 VStack {
                     cartComponentView
@@ -33,43 +44,59 @@ struct ProductsView: View {
                 .padding()
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .principal, content: {
-                headerTextComponentView(text: "Products")
-            })
-        }
-
     }
 }
 
 // MARK: - Components
 extension ProductsView {
     
-    // MARK: - cartComponentView
+    // MARK: CartComponentView
     private var cartComponentView: some View {
-        CartComponentView(viewModel: CartComponentViewModel(checkout: viewModel.checkout, basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty), userBalance: viewModel.userBalance, basketItemCount: viewModel.basketItemCount, basketTotalPrice: viewModel.basketTotalPrice, isLoading: $isLoading, showSuccessAlert: $viewModel.showSuccessAlert, showFailureAlert: $viewModel.showFailureAlert)
+        CartComponentView(
+            viewModel: CartComponentViewModel(
+                checkout: viewModel.checkout,
+                basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty
+            ),
+            isLoading: $viewModel.isLoading,
+            showSuccessAlert: $viewModel.showSuccessAlert,
+            showFailureAlert: $viewModel.showFailureAlert,
+            userBalance: viewModel.userBalance,
+            basketItemCount: viewModel.basketItemCount,
+            basketTotalPrice: viewModel.basketTotalPrice
+        )
     }
     
-    // MARK: - productScrollView
+    // MARK: ProductScrollView
     private var productScrollView: some View {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.categoryProduct) { product in
-                    ProductComponentView(viewModel: ProductComponentViewModel(product: product, addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
-                        .onTapGesture {
-                            router.navigate(to: .productsDetailsView(product: product))
-                        }
+                    ProductComponentView(viewModel: ProductComponentViewModel(
+                        product: product,
+                        addProductToBasket: viewModel.addProductToBasket,
+                        getQuantityInBasket: viewModel.getQuantityInBasket,
+                        reduceItemCount: viewModel.reduceItemCount,
+                        productInBasket: viewModel.productInBasket,
+                        deleteProductFromBasket: viewModel.deleteProductFromBasket
+                    ))
+                    .onTapGesture {
+                        router.navigate(to: .productsDetailsView(product: product))
+                    }
                 }
             }
         }
     }
-    
 }
 
 // MARK: - Properties
 #Preview {
     NavigationStack {
-        ProductsView(viewModel: ProductsViewModel(products: [], category: ""))
-            .environmentObject(Router())
+        ProductsView(
+            viewModel: ProductsViewModel(
+                products: [],
+                category: ""
+            )
+        )
+        .environmentObject(Router())
     }
 }

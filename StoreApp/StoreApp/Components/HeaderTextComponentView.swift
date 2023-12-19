@@ -1,5 +1,5 @@
 //
-//  headerTextComponentView.swift
+//  HeaderTextComponentView.swift
 //  StoreApp
 //
 //  Created by Andria Inasaridze on 18.12.23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct headerTextComponentView: View {
+struct HeaderTextComponentView: View {
     
     // MARK: - Properties
     let text: String
@@ -23,5 +23,5 @@ struct headerTextComponentView: View {
 
 // MARK: - Preview
 #Preview(traits: .sizeThatFitsLayout) {
-    headerTextComponentView(text: "Categories")
+    HeaderTextComponentView(text: "Categories")
 }

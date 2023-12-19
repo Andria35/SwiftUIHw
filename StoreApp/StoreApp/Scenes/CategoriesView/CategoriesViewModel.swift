@@ -11,9 +11,9 @@ import NetworkManager
 final class CategoriesViewModel: ObservableObject {
     // MARK: - Properties
     @Published var products: [Product] = []
+    
     var uniqueCategories: [String] {
-        let uniqueCategories = Set(products.map { $0.category })
-        return Array(uniqueCategories)
+        Array(Set(products.map { $0.category }))
     }
     
     // MARK: - Initialization

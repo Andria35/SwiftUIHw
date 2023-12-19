@@ -5,7 +5,6 @@
 //  Created by Andria Inasaridze on 18.12.23.
 //
 
-import Foundation
 import SwiftUI
 
 final class Router: ObservableObject {
@@ -13,7 +12,7 @@ final class Router: ObservableObject {
     @Published var navigationPath = NavigationPath()
     
     // MARK: - Destination
-    public enum Destination: Codable, Hashable {
+    public enum Destination: Decodable, Hashable {
         case productsView(category: String, products: [Product])
         case productsDetailsView(product: Product)
     }
@@ -30,5 +29,4 @@ final class Router: ObservableObject {
     func navigateToRoot() {
         navigationPath.removeLast(navigationPath.count)
     }
-    
 }

@@ -28,7 +28,7 @@ struct ProductComponentView: View {
 // MARK: - Components
 extension ProductComponentView {
     
-    // MARK: - productImageView
+    // MARK: ProductImageView
     private var productImageView: some View {
         viewModel.productImage
             .resizable()
@@ -36,7 +36,7 @@ extension ProductComponentView {
             .frame(height: 120)
     }
     
-    // MARK: - namePriceVStack
+    // MARK: NamePriceVStack
     private var namePriceVStack: some View {
         VStack(alignment:.leading) {
             Text(viewModel.product.title)
@@ -48,7 +48,7 @@ extension ProductComponentView {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    // MARK: - addDeleteHStack
+    // MARK: AddDeleteHStack
     private var addDeleteHStack: some View {
         HStack {
             Button(action: {
@@ -69,15 +69,19 @@ extension ProductComponentView {
         .padding(.top)
     }
     
-    // MARK: - countVStack
+    // MARK: CountVStack
     private var countHStack: some View {
         HStack {
-            Button(action: {
-                viewModel.reduceItem()
-            }, label: {
-                Image(systemName: "minus")
-            })
+            Button(
+                action: {
+                    viewModel.reduceItem()
+                },
+                label: {
+                    Image(systemName: "minus")
+                }
+            )
             .buttonStyle(.borderless)
+            
             Text("\(viewModel.getQuantity())")
                 .font(.title3)
                 .padding(.horizontal, 5)
@@ -86,12 +90,14 @@ extension ProductComponentView {
                         .stroke(Color.black.opacity(0.5))
                 }
             
-            Button(action: {
-                viewModel.addProduct()
-
-            }, label: {
-                Image(systemName: "plus")
-            })
+            Button(
+                action: {
+                    viewModel.addProduct()
+                },
+                label: {
+                    Image(systemName: "plus")
+                }
+            )
             .buttonStyle(.borderless)
         }
     }
@@ -100,6 +106,15 @@ extension ProductComponentView {
 
 // MARK: - Preview
 #Preview(traits: .sizeThatFitsLayout) {
-    ProductComponentView(viewModel: ProductComponentViewModel(product: ProductMockData.product, addProductToBasket: { _ in }, getQuantityInBasket: { _ in 0 }, reduceItemCount: { _ in }, productInBasket: { _ in false }, deleteProductFromBasket: { _ in }) )
-        .frame(width: 200)
+    ProductComponentView(
+        viewModel: ProductComponentViewModel(
+            product: ProductMockData.product,
+            addProductToBasket: { _ in },
+            getQuantityInBasket: { _ in 0 },
+            reduceItemCount: { _ in },
+            productInBasket: { _ in false },
+            deleteProductFromBasket: { _ in }
+        )
+    )
+    .frame(width: 200)
 }

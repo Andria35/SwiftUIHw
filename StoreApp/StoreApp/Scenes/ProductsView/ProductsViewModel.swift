@@ -18,6 +18,7 @@ final class ProductsViewModel: ObservableObject {
     @Published var userBalance: Double = 5000
     @Published var showSuccessAlert: Bool = false
     @Published var showFailureAlert: Bool = false
+    @Published var isLoading: Bool = false
     
     var basketItemCount: Int {
         basket.reduce(0) { $0 + $1.quantityInBasket }
@@ -94,5 +95,4 @@ final class ProductsViewModel: ObservableObject {
         userBalance -= basketTotalPrice
         basket.removeAll()
     }
-    
 }

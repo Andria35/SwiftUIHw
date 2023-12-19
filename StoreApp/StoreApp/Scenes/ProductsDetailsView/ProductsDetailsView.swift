@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ProductsDetailsView: View {
-    
+    // MARK: - Properties
     @StateObject var viewModel: ProductDetailsViewModel
     @EnvironmentObject private var router: Router
     
+    // MARK: - Body
     var body: some View {
         ZStack {
             MainBackgroundComponentView()
@@ -26,7 +27,7 @@ struct ProductsDetailsView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal, content: {
-                headerTextComponentView(text: "Product Details")
+                HeaderTextComponentView(text: "Product Details")
             })
         }
     }
@@ -35,7 +36,7 @@ struct ProductsDetailsView: View {
 // MARK: - Components
 extension ProductsDetailsView {
     
-    // MARK: - productImage
+    // MARK: ProductImage
     private var productImage: some View {
         viewModel.productImage
             .resizable()
@@ -48,7 +49,7 @@ extension ProductsDetailsView {
             .padding(.bottom)
     }
     
-    // MARK: - descriptionVStack
+    // MARK: DescriptionVStack
     private var descriptionVStack: some View {
         VStack(alignment:.leading) {
             HStack {
@@ -79,25 +80,32 @@ extension ProductsDetailsView {
         }
     }
     
-    // MARK: - returnToCategoriesButton
+    // MARK: ReturnToCategoriesButton
     private var returnToCategoriesButton: some View {
-        Button(action: {
-            router.navigateToRoot()
-        }, label: {
-            Text("Return To Categories")
-                .font(.headline)
-                .foregroundStyle(.white)
-                .padding()
-                .padding(.horizontal)
-                .background(Color.secondaryBackgroundColor)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-        })
+        Button(
+            action: {
+                router.navigateToRoot()
+            },
+            label: {
+                Text("Return To Categories")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .padding()
+                    .padding(.horizontal)
+                    .background(Color.secondaryBackgroundColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+        )
     }
 }
 
 #Preview {
     NavigationStack {
-        ProductsDetailsView(viewModel: ProductDetailsViewModel(product: ProductMockData.product))
+        ProductsDetailsView(
+            viewModel: ProductDetailsViewModel(
+                product: ProductMockData.product
+            )
+        )
     }
     .environmentObject(Router())
 }

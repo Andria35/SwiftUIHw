@@ -10,8 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     // MARK: - Properties
-    @StateObject private var viewModel = MainViewModel()
-    @State private var isLoading: Bool = false
+    @StateObject var viewModel: MainViewModel
     
     private let gridLayout: [GridItem] = [
         GridItem(.flexible()),
@@ -22,8 +21,15 @@ struct MainView: View {
     var body: some View {
         ZStack {
             MainBackgroundComponentView()
-            if isLoading {
-                LoadingComponentView(isLoading: $isLoading)
+            isLoading()
+        }
+    }
+    
+    // MARK: - Methods
+    private func isLoading() -> some View {
+        Group {
+            if viewModel.isLoading {
+                LoadingComponentView(isLoading: $viewModel.isLoading)
             } else {
                 VStack {
                     cartComponentView
@@ -38,17 +44,35 @@ struct MainView: View {
 // MARK: - Components
 extension MainView {
     
-    // MARK: - cartComponentView
+    // MARK: CartComponentView
     private var cartComponentView: some View {
-        CartComponentView(viewModel: CartComponentViewModel(checkout: viewModel.checkout, basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty), userBalance: viewModel.userBalance, basketItemCount: viewModel.basketItemCount, basketTotalPrice: viewModel.basketTotalPrice, isLoading: $isLoading, showSuccessAlert: $viewModel.showSuccessAlert, showFailureAlert: $viewModel.showFailureAlert)
+        CartComponentView(
+            viewModel: CartComponentViewModel(
+                checkout: viewModel.checkout,
+                basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty
+            ),
+            isLoading: $viewModel.isLoading,
+            showSuccessAlert: $viewModel.showSuccessAlert,
+            showFailureAlert: $viewModel.showFailureAlert,
+            userBalance: viewModel.userBalance,
+            basketItemCount: viewModel.basketItemCount,
+            basketTotalPrice: viewModel.basketTotalPrice
+        )
     }
     
-    // MARK: - productScrollView
+    // MARK: ProductScrollView
     private var productScrollView: some View {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.products) { product in
-                    ProductComponentView( viewModel: ProductComponentViewModel(product: product,addProductToBasket: viewModel.addProductToBasket, getQuantityInBasket: viewModel.getQuantityInBasket, reduceItemCount: viewModel.reduceItemCount, productInBasket: viewModel.productInBasket, deleteProductFromBasket: viewModel.deleteProductFromBasket))
+                    ProductComponentView(viewModel: ProductComponentViewModel(
+                        product: product,
+                        addProductToBasket: viewModel.addProductToBasket,
+                        getQuantityInBasket: viewModel.getQuantityInBasket,
+                        reduceItemCount: viewModel.reduceItemCount,
+                        productInBasket: viewModel.productInBasket,
+                        deleteProductFromBasket: viewModel.deleteProductFromBasket
+                    ))
                 }
             }
         }
@@ -59,7 +83,7 @@ extension MainView {
 // MARK: - Preview
 #Preview {
     TabView {
-        MainView()
+        MainView(viewModel: MainViewModel())
             .tabItem {
                 Image(systemName: "storefront")
             }
