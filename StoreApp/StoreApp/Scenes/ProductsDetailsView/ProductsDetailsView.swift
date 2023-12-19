@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ProductsDetailsView: View {
-    
+    // MARK: - Properties
     @StateObject var viewModel: ProductDetailsViewModel
     @EnvironmentObject private var router: Router
     
+    // MARK: - Body
     var body: some View {
         ZStack {
             MainBackgroundComponentView()
@@ -35,7 +36,7 @@ struct ProductsDetailsView: View {
 // MARK: - Components
 extension ProductsDetailsView {
     
-    // MARK: - productImage
+    // MARK: ProductImage
     private var productImage: some View {
         viewModel.productImage
             .resizable()
@@ -48,7 +49,7 @@ extension ProductsDetailsView {
             .padding(.bottom)
     }
     
-    // MARK: - descriptionVStack
+    // MARK: DescriptionVStack
     private var descriptionVStack: some View {
         VStack(alignment:.leading) {
             HStack {
@@ -79,7 +80,7 @@ extension ProductsDetailsView {
         }
     }
     
-    // MARK: - returnToCategoriesButton
+    // MARK: ReturnToCategoriesButton
     private var returnToCategoriesButton: some View {
         Button(
             action: {

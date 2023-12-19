@@ -14,7 +14,6 @@ final class ProductComponentViewModel: ObservableObject {
     @Published var productImage: Image = Image(systemName: "photo")
     let product: Product
 
-    
     // MARK: - Closures
     private var addProductToBasket: (Product) -> ()
     private var getQuantityInBasket: (Product) -> Int
@@ -41,7 +40,6 @@ final class ProductComponentViewModel: ObservableObject {
         Task {
             await fetchImage(urlString: product.images.first ?? "")
         }
-        
     }
     
     // MARK: - Methods

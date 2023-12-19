@@ -17,14 +17,14 @@ struct StoreAppApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                MainView()
+                MainView(viewModel: MainViewModel())
                     .tabItem {
                         Image(systemName: "storefront")
                         Text("Shop")
                     }
                 
                 NavigationStack(path: $router.navigationPath) {
-                    CategoriesView()
+                    CategoriesView(viewModel: CategoriesViewModel())
                         .navigationDestination(for: Router.Destination.self) { destination in
                             switch destination {
                             case .productsView(let category, let products):

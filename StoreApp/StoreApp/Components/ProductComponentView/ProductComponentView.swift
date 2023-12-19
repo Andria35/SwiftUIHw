@@ -28,7 +28,7 @@ struct ProductComponentView: View {
 // MARK: - Components
 extension ProductComponentView {
     
-    // MARK: - productImageView
+    // MARK: ProductImageView
     private var productImageView: some View {
         viewModel.productImage
             .resizable()
@@ -36,7 +36,7 @@ extension ProductComponentView {
             .frame(height: 120)
     }
     
-    // MARK: - namePriceVStack
+    // MARK: NamePriceVStack
     private var namePriceVStack: some View {
         VStack(alignment:.leading) {
             Text(viewModel.product.title)
@@ -48,7 +48,7 @@ extension ProductComponentView {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    // MARK: - addDeleteHStack
+    // MARK: AddDeleteHStack
     private var addDeleteHStack: some View {
         HStack {
             Button(action: {
@@ -69,7 +69,7 @@ extension ProductComponentView {
         .padding(.top)
     }
     
-    // MARK: - countVStack
+    // MARK: CountVStack
     private var countHStack: some View {
         HStack {
             Button(

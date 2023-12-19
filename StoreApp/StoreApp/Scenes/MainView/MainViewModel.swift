@@ -5,7 +5,6 @@
 //  Created by Andria Inasaridze on 17.12.23.
 //
 
-import Foundation
 import NetworkManager
 import SwiftUI
 
@@ -16,6 +15,7 @@ final class MainViewModel: ObservableObject {
     @Published var userBalance: Double = 5000
     @Published var showSuccessAlert: Bool = false
     @Published var showFailureAlert: Bool = false
+    @Published var isLoading: Bool = false
     
     var basketItemCount: Int {
         basket.reduce(0) { $0 + $1.quantityInBasket }
@@ -32,7 +32,7 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    //MARK: - Methods
+    // MARK: - Methods
     func addProductToBasket(_ product: Product) {
         if let index = basket.firstIndex(where: { $0.id == product.id }) {
             basket[index].quantityInBasket += 1

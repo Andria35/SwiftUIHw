@@ -10,9 +10,9 @@ import SwiftUI
 struct CategoriesView: View {
     
     // MARK: - Properties
-    @StateObject private var viewModel = CategoriesViewModel()
+    @StateObject var viewModel: CategoriesViewModel
     @EnvironmentObject private var router: Router
-
+    
     // MARK: - Body
     var body: some View {
         ZStack {
@@ -30,7 +30,7 @@ struct CategoriesView: View {
 // MARK: - Components
 extension CategoriesView {
     
-    // MARK: - categoriesScrollView
+    // MARK: CategoriesScrollView
     private var categoriesScrollView: some View {
         ScrollView {
             ForEach(viewModel.uniqueCategories, id: \.self) { category in
@@ -55,7 +55,7 @@ extension CategoriesView {
 #Preview {
     TabView {
         NavigationStack {
-            CategoriesView()
+            CategoriesView(viewModel: CategoriesViewModel())
                 .tabItem {
                     Image(systemName: "menucard.fill")
                 }

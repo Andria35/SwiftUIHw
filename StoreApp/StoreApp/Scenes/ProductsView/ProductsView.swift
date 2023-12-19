@@ -11,7 +11,6 @@ struct ProductsView: View {
     
     // MARK: - Properties
     @StateObject var viewModel: ProductsViewModel
-    @State var isLoading: Bool = false
     @EnvironmentObject private var router: Router
 
     private let gridLayout: [GridItem] = [
@@ -23,8 +22,20 @@ struct ProductsView: View {
     var body: some View {
         ZStack {
             MainBackgroundComponentView()
-            if isLoading {
-                LoadingComponentView(isLoading: $isLoading)
+            isLoading()
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal, content: {
+                HeaderTextComponentView(text: "Products")
+            })
+        }
+    }
+    
+    // MARK: - Methods
+    private func isLoading() -> some View {
+        Group {
+            if viewModel.isLoading {
+                LoadingComponentView(isLoading: $viewModel.isLoading)
             } else {
                 VStack {
                     cartComponentView
@@ -33,35 +44,29 @@ struct ProductsView: View {
                 .padding()
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .principal, content: {
-                HeaderTextComponentView(text: "Products")
-            })
-        }
-
     }
 }
 
 // MARK: - Components
 extension ProductsView {
     
-    // MARK: - cartComponentView
+    // MARK: CartComponentView
     private var cartComponentView: some View {
         CartComponentView(
             viewModel: CartComponentViewModel(
                 checkout: viewModel.checkout,
                 basketItemCountIsEmpty: viewModel.basketItemCountIsEmpty
             ),
+            isLoading: $viewModel.isLoading,
+            showSuccessAlert: $viewModel.showSuccessAlert,
+            showFailureAlert: $viewModel.showFailureAlert,
             userBalance: viewModel.userBalance,
             basketItemCount: viewModel.basketItemCount,
-            basketTotalPrice: viewModel.basketTotalPrice,
-            isLoading: $isLoading,
-            showSuccessAlert: $viewModel.showSuccessAlert,
-            showFailureAlert: $viewModel.showFailureAlert
+            basketTotalPrice: viewModel.basketTotalPrice
         )
     }
     
-    // MARK: - productScrollView
+    // MARK: ProductScrollView
     private var productScrollView: some View {
         ScrollView {
             LazyVGrid(columns: gridLayout) {
@@ -81,7 +86,6 @@ extension ProductsView {
             }
         }
     }
-    
 }
 
 // MARK: - Properties
