@@ -93,6 +93,7 @@ extension ProductsDetailsView {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         })
     }
+    
 }
 
 #Preview {
