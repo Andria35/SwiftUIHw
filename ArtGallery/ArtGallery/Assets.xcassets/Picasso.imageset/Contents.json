@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "4k_picasso_impressionism_by_refinedpermutations_dg2fe7r-fullview.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
