@@ -19,7 +19,7 @@ struct NewsPageView: View {
         VStack(alignment: .leading) {
             VStack {
                 Text("Text size:")
-                    .font(.title)
+                    .font(.system(size: sliderValue))
                 Slider(value: $sliderValue, in: 10...50, step: 1)
             }
             .padding()
