@@ -18,6 +18,7 @@
 		1064DC6D2B45D002007E42EC /* NasaLibraryItemMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064DC6C2B45D002007E42EC /* NasaLibraryItemMockData.swift */; };
 		1064DC702B45D2D3007E42EC /* NasaLibraryItemComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064DC6F2B45D2D3007E42EC /* NasaLibraryItemComponentViewModel.swift */; };
 		1064DC742B45D71D007E42EC /* NasaLibraryItemVisuals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064DC732B45D71D007E42EC /* NasaLibraryItemVisuals.swift */; };
+		1064DC762B46C109007E42EC /* VideoPlayerUIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064DC752B46C109007E42EC /* VideoPlayerUIViewControllerRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1064DC6C2B45D002007E42EC /* NasaLibraryItemMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaLibraryItemMockData.swift; sourceTree = "<group>"; };
 		1064DC6F2B45D2D3007E42EC /* NasaLibraryItemComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaLibraryItemComponentViewModel.swift; sourceTree = "<group>"; };
 		1064DC732B45D71D007E42EC /* NasaLibraryItemVisuals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaLibraryItemVisuals.swift; sourceTree = "<group>"; };
+		1064DC752B46C109007E42EC /* VideoPlayerUIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerUIViewControllerRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				1064DC6E2B45D2AE007E42EC /* NasaLibraryItemComponentView */,
+				1064DC752B46C109007E42EC /* VideoPlayerUIViewControllerRepresentable.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1064DC762B46C109007E42EC /* VideoPlayerUIViewControllerRepresentable.swift in Sources */,
 				1064DC702B45D2D3007E42EC /* NasaLibraryItemComponentViewModel.swift in Sources */,
 				1064DC682B45C03E007E42EC /* NasaLibrary.swift in Sources */,
 				1064DC6D2B45D002007E42EC /* NasaLibraryItemMockData.swift in Sources */,

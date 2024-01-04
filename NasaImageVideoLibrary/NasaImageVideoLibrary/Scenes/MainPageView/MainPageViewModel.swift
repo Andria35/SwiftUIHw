@@ -18,9 +18,7 @@ final class MainPageViewModel: ObservableObject {
     init(networkManager: APIServices) {
         self.networkManager = networkManager
     }
-    
-    // MARK: - Methods
-    
+        
     // MARK: - API Calls
     func fetchNasaLibraryItems(searchParameter: String) async {
         let urlString = "https://images-api.nasa.gov/search?q=\(searchParameter)"

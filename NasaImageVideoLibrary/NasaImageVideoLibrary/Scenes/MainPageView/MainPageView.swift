@@ -24,14 +24,9 @@ struct MainPageView: View {
             searchTextField
             if !viewModel.nasaLibraryItems.isEmpty {
                 ScrollView {
-                    LazyVGrid(columns: gridLayout) {
-                        ForEach(viewModel.nasaLibraryItems) { item in
-                            NasaLibraryItemComponentView(viewModel: NasaLibraryItemComponentViewModel(item: item, networkManager: NetworkManager()))
-                        }
-                    }
+                    nasaLibraryItemsGrid
                 }
             }
-            
             Spacer()
         }
     }
@@ -47,12 +42,20 @@ extension MainPageView {
                 await viewModel.fetchNasaLibraryItems(searchParameter: textFieldText)
             }
         })
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
-            .padding()
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray, lineWidth: 1)
+        )
+        .padding()
+    }
+    
+    private var nasaLibraryItemsGrid: some View {
+        LazyVGrid(columns: gridLayout) {
+            ForEach(viewModel.nasaLibraryItems) { item in
+                NasaLibraryItemComponentView(viewModel: NasaLibraryItemComponentViewModel(item: item, networkManager: NetworkManager()))
+            }
+        }
     }
 }
 

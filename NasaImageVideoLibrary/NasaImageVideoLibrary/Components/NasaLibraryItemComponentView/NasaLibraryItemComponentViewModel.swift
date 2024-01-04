@@ -15,7 +15,7 @@ final class NasaLibraryItemComponentViewModel: ObservableObject {
     let networkManager: APIServices
     @Published var itemImage: Image = Image(systemName: "photo")
     @Published var nasaLibraryItemVisuals: NasaLibraryItemVisuals = []
-
+    
     // MARK: - Initialization
     init(item: NasaLibraryItem, networkManager: APIServices) {
         self.item = item
@@ -29,6 +29,14 @@ final class NasaLibraryItemComponentViewModel: ObservableObject {
     // MARK: - Methods
     func findFirstJPG() -> String? {
         nasaLibraryItemVisuals.first { $0.hasSuffix(".jpg") }
+    }
+    
+    func findFirstMp4() -> String? {
+        if item.data.first?.mediaType == .video {
+            return nasaLibraryItemVisuals.first { $0.hasSuffix(".mp4") }
+        } else {
+            return nil
+        }
     }
     
     // MARK: = API Calls
